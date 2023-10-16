@@ -148,8 +148,6 @@ export default function UploadingAvatarPage() {
                 <div
                   className="relative flex justify-center mb-[32px] items-center w-[375px] h-[198px] rounded-[12px] bg-grey-50 overflow-hidden"
                 >
-                  {/*<CropImage imageSrc={ base64 } />*/ }
-                  {/*<Image src="/images/image-border.svg" width={ 170 } height={ 168 } alt="Рамка для изображения" className="absolute"/>*/}
                   <AvatarEditor
                     image={ base64 }
                     width={ 163 }
@@ -162,27 +160,8 @@ export default function UploadingAvatarPage() {
                     className="crop"
                   />
 
-
-                  {/*<Draggable>*/ }
-                  {/*  <Image*/ }
-                  {/*    src={ base64 } fill alt="Uploaded Image" className="drop-img" objectFit="cover"*/ }
-                  {/*  />*/ }
-                  {/*< /Draggable>*/ }
-                  {/*<div*/ }
-                  {/*  className="absolute top-[14px] right-[105px] bottom-[20px] left-[105px] rounded-[50%] shadow-[0_0_0_600_grba(0, 0, 0, .5)]  overflow-hidden "*/ }
-                  {/*>*/ }
-                  {/*</div>*/ }
                 </div>
 
-                // <div className="flex justify-center items-center w-[375px] h-[198px] rounded-[12px] bg-grey-50">
-                //   <div className="relative w-[164px] h-[164px] rounded-[50%] bg-grey-50 overflow-hidden">
-                //     <Draggable>
-                //       <Image
-                //         src={ base64 } fill alt="Uploaded Image" className="drop-img" objectFit="cover"
-                //       />
-                //     < /Draggable>
-                //   </div>
-                // </div>
               ) }
 
               <button

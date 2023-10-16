@@ -18,6 +18,7 @@ export default function Home() {
         иконку входа в шапке сайта. Вы можете зарегистрироваться или войти по логину: <span
           className="font-normal"
         >+79274589247</span> и паролю: <span className="font-normal">123456</span></p>
+
     </>
   );
 }
