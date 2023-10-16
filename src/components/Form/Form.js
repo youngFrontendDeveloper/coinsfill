@@ -2,6 +2,7 @@ import PhoneField from "@/components/PhoneField/PhoneField";
 import PasswordField from "@/components/PasswordField/PasswordField";
 import TextField from "@/components/TextField/TextField";
 import CheckboxField from "@/components/CheckboxField/CheckboxField";
+import Button from "@/components/Button/Button";
 
 export default function Form({
                                formFields,
@@ -11,7 +12,7 @@ export default function Form({
                                handleSubmit,
                                onError,
                                onSubmit,
-                               // error,
+                               error,
                                getValues,
                              }) {
 
@@ -31,7 +32,7 @@ export default function Form({
                     required: "Пожалуйста, введите телефон",
                     maxLength: {
                       value: 12,
-                      message: "Должно быть не более 12 знаков",
+                      message: "Должно быть не более 12 символов",
                     },
                     pattern: {
                       value: /[+0-9]{12}/,
@@ -39,6 +40,7 @@ export default function Form({
                     }
                   } ) }
                   errors={ errors[ item.name ] }
+                  // errorPhone={ error.phone }
                   key={ `${ item.name }-${ index }` }
                 />
               );
@@ -49,14 +51,18 @@ export default function Form({
                   item={ item }
                   register={ register( `${ item.name }`, {
                     required: "Пожалуйста, введите пароль",
+                    minLength: {
+                      value: 5,
+                      message: "Должно быть не менее 5 символов",
+                    },
                   } ) }
                   errors={ errors[ item.name ] }
                   key={ `${ item.name }-${ index }` }
-                  // errorPassword={ error.password }
+                  errorPassword={ error.password }
                 />
               );
 
-            case( "confirmPasword" ):
+            case( "confirmPassword" ):
               return (
                 <PasswordField
                   item={ item }
@@ -66,7 +72,7 @@ export default function Form({
                   } ) }
                   errors={ errors[ item.name ] }
                   key={ `${ item.name }-${ index }` }
-                  // errorConfirm={ error.confirm }
+                  // errorConfirmPassword={ error.confirmPassword }
                 />
               );
 
@@ -95,12 +101,13 @@ export default function Form({
 
         } )
       }
-      <button
-        type="submit"
-        className="button w-[319px] h-[62px] bg-gradient-to-r from-my-orange-100 to-my-orange-50 hover:bg-gradient-to-l"
-      >
-        { buttonText }
-      </button>
+      <Button buttonText={buttonText} btnClass="from-my-orange-100 to-my-orange-50" />
+      {/*<button*/}
+      {/*  type="submit"*/}
+      {/*  className="button w-[319px] h-[62px] bg-gradient-to-r from-my-orange-100 to-my-orange-50 hover:bg-gradient-to-l"*/}
+      {/*>*/}
+      {/*  { buttonText }*/}
+      {/*</button>*/}
     </form>
   );
 }

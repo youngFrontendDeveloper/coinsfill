@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function PasswordField({ item, register, errors }) {
-
+export default function PasswordField({ item, register, errors, errorPassword, errorConfirmPassword }) {
+  console.log(errorPassword);
   const [type, setType]=useState("password")
   const handleClickPasswordIcon=()=>{
     if(type ==="password"){
@@ -38,6 +38,13 @@ export default function PasswordField({ item, register, errors }) {
         errors.type === 'validate' && (
           <div className="text-red-500 text-[14px]">Пароли не совпадают</div>
         )}
+      {
+        errorPassword && <p className="text-red-500 text-[14px]">{errorPassword}</p>
+      }
+      {
+        errorConfirmPassword && <p className="text-red-500 text-[14px]">{errorConfirmPassword}</p>
+      }
+
     </div>
   );
 }

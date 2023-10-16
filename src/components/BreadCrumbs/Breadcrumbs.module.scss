@@ -1,0 +1,40 @@
+@use "../../styles/variables" as variable;
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 30px;
+}
+
+.breadcrumbs__link,
+.breadcrumbs__item {
+  color: variable.$color-text;
+  //font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.breadcrumbs__item:first-of-type > .breadcrumbs__link {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+}
+
+.breadcrumbs__item {
+  color: variable.$color-text;
+}
+
+.breadcrumbs__link:hover {
+  color: variable.$color-violet;
+  text-decoration: underline;
+}
+
+.breadcrumbs__span {
+  position: relative;
+  top: 2px;
+  font-size: 20px;
+}

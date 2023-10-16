@@ -9,9 +9,9 @@ export default function Document() {
       <Head />
       <body className={ Mont.className }>
       <Header />
-      <div className="main">
+      <main className="main">
         <Main />
-      </div>
+      </main>
       <Footer />
       <div id="modal-root" />
       <NextScript />
