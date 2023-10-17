@@ -30,19 +30,20 @@ export default function CheckboxField({ item, register, errors, }) {
           onClick={ handleClickCheckbox }
         >
           {
-            checked && <span className="custom-check" />
+            checked &&
+            <span className="custom-check" />
           }
         </p>
 
         <label
           htmlFor={ item.name }
-          className="w-[237px] text-white text-[12px] font-medium leading-[14.63px]"
+          className="w-[237px] text-white text-[12px] font-medium leading-[14.63px] cursor-pointer"
           onClick={ handleClickCheckbox }
         >
-          Нажимая кнопку, вы подтверждаете, что ознакомились и соглашаетесь с
-          <Link href="/" className="underline">
+          Нажимая кнопку, вы подтверждаете, что ознакомились и соглашаетесь с&nbsp;
+          <Link href="/" className="underline text-link-blue-100 hover:hover:text-my-orange-100">
             Условиями Соглашения!
-          </Link>
+          </Link>&nbsp;
           Правилами и политикой конфиденциальности компании
         </label>
         { !checked && (

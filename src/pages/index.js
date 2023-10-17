@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -10,6 +12,7 @@ export default function Home() {
         <li>Кастомную стилизацию поля формы input type=&quot;file&quot;</li>
         <li>Ограничение загружаемого файла по типу и размеру</li>
         <li>Отображение полей формы загрузки аватара в зависимости от того, выбрано изображение или нет</li>
+        <li>Обрезка изображения аватара с помощью библиотеки react-avatar-editor</li>
         <li>Оформление стилей с помощью Tailwindcss</li>
         {/*<li></li>*/ }
         {/*<li></li>*/ }
@@ -18,6 +21,7 @@ export default function Home() {
         иконку входа в шапке сайта. Вы можете зарегистрироваться или войти по логину: <span
           className="font-normal"
         >+79274589247</span> и паролю: <span className="font-normal">123456</span></p>
+      <p className="max-w-[600px] mx-auto mb-[50px] text-black-80 font-medium">Макет проекта в Figma находится по <Link href="https://www.figma.com/file/IzomCNCemtEBchR7PqsA5B/testovoe-fixer?type=design&node-id=0-1&mode=design&t=jwsWI3eqcdBWmo4A-0" title="Посмотреть макет" className="text-link-blue-100 underline hover:text-my-orange-100" target="_blank">этой</Link> ссылке</p>
 
     </>
   );

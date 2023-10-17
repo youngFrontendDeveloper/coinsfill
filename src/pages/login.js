@@ -23,6 +23,8 @@ export default function LoginPage() {
 
   const router = useRouter();
 
+  console.log(showModal);
+
   const onError = (errors, e) => console.log( errors, e );
 
   const handleCloseModal = () => {

@@ -36,7 +36,7 @@ export default function Form({
                     },
                     pattern: {
                       value: /[+0-9]{12}/,
-                      message: "Пожалуйста, введите валидный телефон вида: +79278421489",
+                      message: "Пожалуйста, введите валидный номер телефона вида: +79278421489 без пропусков и тире" ,
                     }
                   } ) }
                   errors={ errors[ item.name ] }
@@ -50,7 +50,7 @@ export default function Form({
                 <PasswordField
                   item={ item }
                   register={ register( `${ item.name }`, {
-                    required: "Пожалуйста, введите пароль",
+                    required: "Пожалуйста, введите пароль не менее 5 символов",
                     minLength: {
                       value: 5,
                       message: "Должно быть не менее 5 символов",

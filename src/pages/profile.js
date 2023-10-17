@@ -19,7 +19,7 @@ export default function ProfilePage() {
       {/*<Breadcrumbs items={ breadCrumbs } />*/}
       <h1 className="mb-[37px] text-[26px] font-bold text-center leading-[32px]">Профиль пользователя</h1>
       <p className="text-[24px] text-red-500">Реализована только возможность загрузить аватар!!!</p>
-      <Link href="/avatar" className="text-[18px] font-medium">Загрузка аватара</Link>
+      <Link href="/avatar" className="text-[18px] font-medium underline text-link-blue-100 hover:text-my-orange-100">Загрузить аватар</Link>
     </div>
   );
 }
