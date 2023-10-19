@@ -19,7 +19,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: variable.$width-xl;
+  max-width: variable.$width-lg;
   margin: 0 auto;
   padding-left: 28px;
   padding-right: 28px;
@@ -75,9 +75,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  //width: 375px;
-  //height: 65px;
-  //color: variable.$color-white;
   font-weight: 700;
   font-size: 14px;
   line-height: 17.07px;
@@ -167,7 +164,7 @@ body {
 }
 
 .custom-check {
-  display:block;
+  display: block;
   width: 11px;
   height: 10px;
   background-image: url(/images/check-icon.svg);
