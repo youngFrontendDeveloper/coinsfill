@@ -8,10 +8,10 @@ export default function Home() {
   console.log( auth );
   return (
     <>
-      <h1 className="mb-[20px] text-[35px] text-center font-bold">Этот проект демонстрирует:</h1>
-      {/*<p className="mb-[37px] text-[26px] font-bold text-center leading-[32px]">Этот проект демонстрирует:</p>*/ }
+      <h1 className="mb-[20px] text-[35px] text-center font-bold">Данная работа демонстрирует:</h1>
+
       <ul className="max-w-[600px] mx-auto mb-[20px] text-black-80 list-disc">
-        <li>Проект для экрана с разрешением 430px</li>
+        <li>Адаптивный проект для mobile и desktop экранов (минимальное разрешение 430px)</li>
         <li>Работу страницы входа/регистрации пользователя с помощью REST API</li>
         <li>Приватные и публичные страницы (<Link
           href="/profile" className="text-link-blue-100 underline hover:text-my-orange-100"
@@ -23,8 +23,7 @@ export default function Home() {
         <li>Отображение полей формы загрузки аватара в зависимости от того, выбрано изображение или нет</li>
         <li>Обрезку изображения аватара с помощью библиотеки react-avatar-editor</li>
         <li>Оформление стилей с помощью Tailwindcss</li>
-        {/*<li></li>*/ }
-        {/*<li></li>*/ }
+
       </ul>
       <p className="max-w-[600px] mx-auto mb-[50px] text-black-80 font-medium">Для проверки работоспособности нажмите на
         иконку входа в шапке сайта. Вы можете зарегистрироваться или войти по логину: <span

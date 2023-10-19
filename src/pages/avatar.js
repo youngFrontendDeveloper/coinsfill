@@ -4,6 +4,7 @@ import { setAvatar } from "@/services/setAvatar";
 import AvatarEditor from "react-avatar-editor";
 import { useRouter } from "next/navigation";
 import { authContext } from "@/context/authContext";
+import Button from "@/components/Button/Button";
 
 export default function UploadingAvatarPage() {
   const [ file, setFile ] = useState( null );
@@ -12,7 +13,6 @@ export default function UploadingAvatarPage() {
   const { auth } = useContext( authContext );
   const router = useRouter();
   const editorRef = useRef( null );
-  console.log( file );
 
   const onFileChange = async(e) => {
     if( !e.target.files ) {
@@ -63,9 +63,9 @@ export default function UploadingAvatarPage() {
         router.push( "/profile" );
       }, 3000 );
     } else {
-      setMessageSaving( "Произошла ошибка. Изображение не сохранено" );
+      setMessageErr( "Произошла ошибка. Изображение не сохранено" );
       setTimeout( () => {
-        setMessageSaving( "" );
+        setMessageErr( "" );
       }, 3000 );
     }
 
@@ -138,21 +138,24 @@ export default function UploadingAvatarPage() {
                 </div>
 
               ) }
-
-              <button
-                className="button w-[375px] h-[65px] mb-[11px] text-white bg-gradient-to-r from-violet-100 to-violet-50 hover:bg-gradient-to-l shadow-[0_4px_20px_0] shadow-violet-50/50"
+              <Button
                 type="submit"
-              >
-                Сохранить
-              </button>
-              <button
+                buttonText="Сохранить"
+                width="375px"
+                height="65px"
+                btnClass="mb-[11px] text-white from-violet-100 to-violet-50 shadow-[0_4px_20px_0] shadow-violet-50/50"
+              />
+              <Button
                 type="reset"
+                buttonText="Отменить"
+                width="375px"
+                height="65px"
+                btnClass="mb-[66px] text-black-100 from-violet-10 to-violet-20 shadow-[0_4px_20px_0] shadow-violet-50/50"
                 onClick={ handleReset }
-                className="button w-[375px] h-[65px] mb-[66px] text-black-100 bg-gradient-to-r from-violet-10 to-violet-20 hover:bg-gradient-to-l shadow-[0_4px_20px_0] shadow-violet-50/50"
-              >
-                Отменить
-              </button>
+              />
+
               { messageSaving && <p className="text-[14px]">{ messageSaving }</p> }
+              { messageErr && <p className="text-red-500 text-[14px]">{ messageErr }</p> }
             </>
         }
 

@@ -14,6 +14,10 @@ export default function Form({
                                onSubmit,
                                error,
                                getValues,
+                               type,
+                               width,
+                               height,
+                               btnClass,
                              }) {
 
   return (
@@ -36,7 +40,7 @@ export default function Form({
                     },
                     pattern: {
                       value: /[+0-9]{12}/,
-                      message: "Пожалуйста, введите валидный номер телефона вида: +79278421489 без пропусков и тире" ,
+                      message: "Пожалуйста, введите валидный номер телефона вида: +79278421489 без пропусков и тире",
                     }
                   } ) }
                   errors={ errors[ item.name ] }
@@ -72,7 +76,6 @@ export default function Form({
                   } ) }
                   errors={ errors[ item.name ] }
                   key={ `${ item.name }-${ index }` }
-                  // errorConfirmPassword={ error.confirmPassword }
                 />
               );
 
@@ -101,13 +104,13 @@ export default function Form({
 
         } )
       }
-      <Button buttonText={buttonText} btnClass="from-my-orange-100 to-my-orange-50" />
-      {/*<button*/}
-      {/*  type="submit"*/}
-      {/*  className="button w-[319px] h-[62px] bg-gradient-to-r from-my-orange-100 to-my-orange-50 hover:bg-gradient-to-l"*/}
-      {/*>*/}
-      {/*  { buttonText }*/}
-      {/*</button>*/}
+      <Button
+        type={ type }
+        width={ width }
+        height={ height }
+        buttonText={ buttonText }
+        btnClass={ btnClass }
+      />
     </form>
   );
 }

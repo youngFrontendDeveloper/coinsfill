@@ -2,9 +2,7 @@ import { useContext, useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import Form from "@/components/Form/Form";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import Button from "@/components/Button/Button";
-import { apiLogin } from "@/services/apiLogin";
 import { authContext } from "@/context/authContext";
 
 
@@ -22,8 +20,6 @@ export default function LoginPage() {
     password: "",
   } );
   const { login } = useContext( authContext );
-
-  // const router = useRouter();
 
   const onError = (errors, e) => console.log( errors, e );
 
@@ -107,57 +103,33 @@ export default function LoginPage() {
   };
 
   const onSubmit = async(data) => {
-    // console.log( data );
+
     await login( url, data );
 
-    // const response = await fetch( url, {
-    //   method: "POST",
-    //   body: JSON.stringify( {
-    //     email: "my-mail@mail.ru",
-    //     // email: data.phone,
-    //     password: data.password
-    //   } )
-    // } );
-    // const result = await response.json();
-    // console.log( result );
-    //
-    // if( result.ok ) {
-    // localStorage.setItem( "token", result.token );
-    //   router.push( "/profile" );
-    // } else {
-    //   setError( result.errors );
-    // }
-
-
-    // await apiLogin( data );
-    // await mutate();
-    // router.push( "/" );
-    // router.back();
   };
 
   return (
     <div
-      className="container py-[40px] flex flex-col items-center"
+      className="py-[40px] flex flex-col items-center"
     >
-      <h1 className="w-[375px] mb-[84px] px-[10px] text-[24px] font-bold  leading-[29.26px]">Выберите действие</h1>
+      <h1 className="w-[375px] mb-[84px] pl-[30px] pr-[10px] text-[24px] font-bold  leading-[29.26px]">Выберите
+        действие</h1>
       <Button
-        buttonText="Login" btnClass=" mb-[20px] from-my-orange-100 to-my-orange-50" onClick={ handleClickLogin }
+        type="submit"
+        width="319px"
+        height="62px"
+        buttonText="Login"
+        btnClass=" mb-[20px] text-white from-my-orange-100 to-my-orange-50"
+        onClick={ handleClickLogin }
       />
       <Button
-        buttonText="Registration" btnClass="mb-[176px] from-violet-100 to-violet-50" onClick={ handleClickRegistration }
+        type="submit"
+        width="319px"
+        height="62px"
+        buttonText="Registration"
+        btnClass="mb-[176px] text-white from-violet-100 to-violet-50"
+        onClick={ handleClickRegistration }
       />
-      {/*<button*/ }
-      {/*  onClick={ handleClickLogin }*/ }
-      {/*  className="button w-[375px] h-[65px]  mb-[20px] bg-gradient-to-r from-my-orange-100 to-my-orange-50 hover:bg-gradient-to-l "*/ }
-      {/*>*/ }
-      {/*  Login*/ }
-      {/*</button>*/ }
-      {/*<button*/ }
-      {/*  onClick={ handleClickRegistration }*/ }
-      {/*  className="button w-[375px] h-[65px] mb-[176px] bg-gradient-to-r from-violet-100 to-violet-50 hover:bg-gradient-to-l "*/ }
-      {/*>*/ }
-      {/*  Registration*/ }
-      {/*</button>*/ }
 
       {
         showModal && <Modal
@@ -174,6 +146,10 @@ export default function LoginPage() {
             getValues={ getValues }
             error={ error }
             buttonText={ buttonText }
+            type="submit"
+            width="319px"
+            height="62px"
+            btnClass="text-white from-my-orange-100 to-my-orange-50 "
           />
 
         </Modal>

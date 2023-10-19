@@ -46,7 +46,7 @@ export default function ProfilePage() {
     <div className="">
       {/*<Breadcrumbs items={ breadCrumbs } />*/ }
       <h1 className="mb-[37px] text-[26px] font-bold text-center leading-[32px]">Профиль пользователя</h1>
-      <div className="block w-[100px] h-[100px] ">
+      <div className="block w-[100px] h-[100px] rounded-[50%] overflow-hidden">
         {
           avatar ? <Image
               src={ avatar }

@@ -9,7 +9,7 @@ export default function Document() {
       <Head />
       <body className={ Mont.className }>
       <Header />
-      <main className="main">
+      <main className="main container">
         <Main />
       </main>
       <Footer />
