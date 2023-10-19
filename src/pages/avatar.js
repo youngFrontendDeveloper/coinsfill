@@ -1,35 +1,18 @@
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { setAvatar } from "@/services/setAvatar";
-import Button from "@/components/Button/Button";
-import Draggable from "react-draggable";
-import CropImage from "@/components/CropImage/CropImage";
 import AvatarEditor from "react-avatar-editor";
+import { useRouter } from "next/navigation";
+import { authContext } from "@/context/authContext";
 
 export default function UploadingAvatarPage() {
   const [ file, setFile ] = useState( null );
-  const [ base64, setBase64 ] = useState( null );
-  const [ isSuccess, setIsSuccess ] = useState( false );
-  const [ message, setMessage ] = useState( "" );
-
+  const [ messageSaving, setMessageSaving ] = useState( "" );
+  const [ messageErr, setMessageErr ] = useState( "" );
+  const { auth } = useContext( authContext );
+  const router = useRouter();
+  const editorRef = useRef( null );
   console.log( file );
-
-  // Convert a file to base64 string
-  const toBase64 = (file) => {
-    return new Promise( (resolve, reject) => {
-      const fileReader = new FileReader();
-
-      fileReader.readAsDataURL( file );
-
-      fileReader.onload = () => {
-        resolve( fileReader.result );
-      };
-
-      fileReader.onerror = (error) => {
-        reject( error );
-      };
-    } );
-  };
 
   const onFileChange = async(e) => {
     if( !e.target.files ) {
@@ -38,34 +21,27 @@ export default function UploadingAvatarPage() {
 
     if( e.target.files[ 0 ].size > 625000 ) {
       const size = ( e.target.files[ 0 ].size / 1048576 ).toFixed( 2 );
-      setMessage( `Размер файла ${ size }Мб превышает 5Мб` );
+      setMessageErr( `Размер файла ${ size }Мб превышает 5Мб. Выберите другой файл` );
       e.target.value = "";
-      setBase64( null );
+      setFile( null );
       return;
     }
 
     if( e.target.files[ 0 ].type !== "image/jpeg" && e.target.files[ 0 ].type !== "image/png" && e.target.files[ 0 ].type !== "image/gif" ) {
-      setMessage( "Формат файла должен быть JPG/JPEG, PNG или GIF" );
+      setMessageErr( "Формат файла должен быть JPG/JPEG, PNG или GIF" );
       e.target.value = "";
-      setBase64( null );
+      setFile( null );
       return;
     }
 
     setFile( e.target.files[ 0 ] );
-    setMessage( "" );
-    const base64 = await toBase64( e.target.files[ 0 ] );
-    setBase64( base64 );
+    setMessageErr( "" );
 
   };
 
   const handleReset = () => {
     setFile( null );
-    setBase64( null );
   };
-
-  // const onClick = (e) => {
-  //   e.currentTarget.value = "";
-  // };
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -74,34 +50,33 @@ export default function UploadingAvatarPage() {
       return;
     }
     const type = file.type;
+    const cropImg = editorRef.current.getImage();
+
+    const base64 = cropImg.toDataURL( "image/*" );
+
     const response = await setAvatar( base64, type );
-    // const response = await setAvatar(base64)
 
+    if( response.ok ) {
+      setMessageSaving( "Изображение сохранено" );
+      setTimeout( () => {
+        setMessageSaving( "" );
+        router.push( "/profile" );
+      }, 3000 );
+    } else {
+      setMessageSaving( "Произошла ошибка. Изображение не сохранено" );
+      setTimeout( () => {
+        setMessageSaving( "" );
+      }, 3000 );
+    }
 
-    // const result = await response.json()
-    console.log( response );
-
-    // if(result.ok){
-    //   setIsSuccess(true)
-    //   setFile( null );
-    //   setBase64( null );
-    // }
-
-    // const base64 = await toBase64( file );
-    // setBase64( base64 );
-
-    // await fetch( "https://test-task.test211.workers.dev/account/image", {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": file.type,
-    //     "token-tt": localStorage.getItem( "token" ),
-    //   },
-    //   body: JSON.stringify( { image: base64 } )
-    // } );
-
-    // setFile( null );
-    // setBase64( null );
   };
+
+  useEffect( () => {
+    if( !auth ) {
+      router.push( "/login" );
+    }
+  } );
+
   return (
     <div className="w-[400px] mx-auto">
       {
@@ -130,7 +105,6 @@ export default function UploadingAvatarPage() {
                   name="avatar"
                   accept="image/png, image/jpeg, image/gif"
                   onChange={ onFileChange }
-                  // onClick={ onClick }
 
                 />
                 <span className="input-file-btn">
@@ -140,16 +114,17 @@ export default function UploadingAvatarPage() {
             Выбрать файл</span>
               </label>
               {
-                message && <p className="text-red-500 text-[14px]">{ message }</p>
+                messageErr && <p className="text-red-500 text-[14px]">{ messageErr }</p>
               }
             </> :
             <>
-              { base64 && (
+              { file && (
                 <div
                   className="relative flex justify-center mb-[32px] items-center w-[375px] h-[198px] rounded-[12px] bg-grey-50 overflow-hidden"
                 >
                   <AvatarEditor
-                    image={ base64 }
+                    ref={ editorRef }
+                    image={ file }
                     width={ 163 }
                     height={ 163 }
                     borderRadius={ 83 }
@@ -177,7 +152,7 @@ export default function UploadingAvatarPage() {
               >
                 Отменить
               </button>
-              { isSuccess && <p className="text-[14px]">Ваш аватар успешно загружен</p> }
+              { messageSaving && <p className="text-[14px]">{ messageSaving }</p> }
             </>
         }
 
