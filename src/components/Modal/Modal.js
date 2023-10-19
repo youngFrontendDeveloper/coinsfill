@@ -6,9 +6,8 @@ import Close from "@/components/Close/Close";
 export default function Modal({ onClose, children, title }) {
   // const modalWrapperRef = useRef();
 
-  // console.log( modalWrapperRef.current );
-
   const backDropHandler = useCallback( e => {
+
     if( e.target.className==="modal-overlay" ) {
       onClose();
     }

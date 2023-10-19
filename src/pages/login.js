@@ -1,10 +1,11 @@
-
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import Form from "@/components/Form/Form";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button/Button";
+import { apiLogin } from "@/services/apiLogin";
+import { authContext } from "@/context/authContext";
 
 
 export default function LoginPage() {
@@ -20,10 +21,9 @@ export default function LoginPage() {
     email: "",
     password: "",
   } );
+  const { login } = useContext( authContext );
 
-  const router = useRouter();
-
-  console.log(showModal);
+  // const router = useRouter();
 
   const onError = (errors, e) => console.log( errors, e );
 
@@ -107,24 +107,26 @@ export default function LoginPage() {
   };
 
   const onSubmit = async(data) => {
-    console.log( data );
-    const response = await fetch( url, {
-      method: "POST",
-      body: JSON.stringify( {
-        email: "my-mail@mail.ru",
-        // email: data.phone,
-        password: data.password
-      } )
-    } );
-    const result = await response.json();
-    console.log( result );
+    // console.log( data );
+    await login( url, data );
 
-    if( result.ok ) {
-      localStorage.setItem( "token", result.token );
-      router.push( "/profile" );
-    } else {
-      setError( result.errors );
-    }
+    // const response = await fetch( url, {
+    //   method: "POST",
+    //   body: JSON.stringify( {
+    //     email: "my-mail@mail.ru",
+    //     // email: data.phone,
+    //     password: data.password
+    //   } )
+    // } );
+    // const result = await response.json();
+    // console.log( result );
+    //
+    // if( result.ok ) {
+    // localStorage.setItem( "token", result.token );
+    //   router.push( "/profile" );
+    // } else {
+    //   setError( result.errors );
+    // }
 
 
     // await apiLogin( data );
@@ -138,20 +140,24 @@ export default function LoginPage() {
       className="container py-[40px] flex flex-col items-center"
     >
       <h1 className="w-[375px] mb-[84px] px-[10px] text-[24px] font-bold  leading-[29.26px]">Выберите действие</h1>
-      <Button buttonText="Login" btnClass=" mb-[20px] from-my-orange-100 to-my-orange-50" onClick={ handleClickLogin }/>
-      <Button buttonText="Registration" btnClass="mb-[176px] from-violet-100 to-violet-50" onClick={ handleClickRegistration }/>
-      {/*<button*/}
-      {/*  onClick={ handleClickLogin }*/}
-      {/*  className="button w-[375px] h-[65px]  mb-[20px] bg-gradient-to-r from-my-orange-100 to-my-orange-50 hover:bg-gradient-to-l "*/}
-      {/*>*/}
-      {/*  Login*/}
-      {/*</button>*/}
-      {/*<button*/}
-      {/*  onClick={ handleClickRegistration }*/}
-      {/*  className="button w-[375px] h-[65px] mb-[176px] bg-gradient-to-r from-violet-100 to-violet-50 hover:bg-gradient-to-l "*/}
-      {/*>*/}
-      {/*  Registration*/}
-      {/*</button>*/}
+      <Button
+        buttonText="Login" btnClass=" mb-[20px] from-my-orange-100 to-my-orange-50" onClick={ handleClickLogin }
+      />
+      <Button
+        buttonText="Registration" btnClass="mb-[176px] from-violet-100 to-violet-50" onClick={ handleClickRegistration }
+      />
+      {/*<button*/ }
+      {/*  onClick={ handleClickLogin }*/ }
+      {/*  className="button w-[375px] h-[65px]  mb-[20px] bg-gradient-to-r from-my-orange-100 to-my-orange-50 hover:bg-gradient-to-l "*/ }
+      {/*>*/ }
+      {/*  Login*/ }
+      {/*</button>*/ }
+      {/*<button*/ }
+      {/*  onClick={ handleClickRegistration }*/ }
+      {/*  className="button w-[375px] h-[65px] mb-[176px] bg-gradient-to-r from-violet-100 to-violet-50 hover:bg-gradient-to-l "*/ }
+      {/*>*/ }
+      {/*  Registration*/ }
+      {/*</button>*/ }
 
       {
         showModal && <Modal

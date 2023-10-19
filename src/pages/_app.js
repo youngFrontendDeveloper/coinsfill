@@ -1,6 +1,13 @@
-import '@/styles/globals.scss'
-import "@/styles/styles.scss"; // Custom styling for the crop container
+import "@/styles/globals.scss";
+import "@/styles/styles.scss";
+import { AuthProvider } from "@/context/authContext";
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+
+  return (
+    <AuthProvider>
+      <Component { ...pageProps } />
+    </AuthProvider>
+  );
+
 }
